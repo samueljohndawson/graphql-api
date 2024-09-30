@@ -1,13 +1,11 @@
 import * as fs from "fs";
-import * as path from "path";
 
 /**
  * csvToJson
  * @param  {string} fileName - the name of the file (including extension) contained in the data/csv directory
  */
-const csvToObjects = (fileName: string) => {
-  const filePath = path.resolve(`./data/csv/${fileName}`);
-  const text = fs.readFileSync(filePath, { encoding: "utf8" });
+export const csvToObjects = (fileName: string) => {
+  const text = fs.readFileSync(`./data/csv/${fileName}`, { encoding: "utf8" });
   const rows = text.split("\n");
   const headers = rows[0].split(",");
   let object = {};
@@ -28,5 +26,3 @@ const csvToObjects = (fileName: string) => {
   });
   return objects;
 };
-
-export default csvToObjects;

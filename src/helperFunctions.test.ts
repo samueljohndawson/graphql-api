@@ -1,5 +1,5 @@
 import { describe, expect, it } from "@jest/globals";
-import csvToObjects from "./helperFunctions";
+import { csvToObjects } from "./helperFunctions";
 
 describe("csvToObjects", () => {
   it("parses a CSV to a list of objects. Each object's keys are the values in the first line of the csv.", () => {
