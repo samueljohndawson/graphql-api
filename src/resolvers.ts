@@ -1,4 +1,4 @@
-import csvToObjects from "./helperFunctions";
+import { csvToObjects } from "./helperFunctions";
 
 export const resolvers = {
   Query: {
