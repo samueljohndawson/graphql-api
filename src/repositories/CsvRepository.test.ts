@@ -15,8 +15,6 @@ describe("CsvRepository", () => {
 
     // When
     const result = repo.read();
-
-    // Then
     const expected = [
       {
         key1: "value1",
@@ -24,6 +22,8 @@ describe("CsvRepository", () => {
         key3: "value3",
       },
     ];
+
+    // Then
     expect(fs.readFileSync).toHaveBeenCalledWith("./data/csv/product.csv", {
       encoding: "utf8",
     });
