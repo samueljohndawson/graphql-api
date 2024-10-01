@@ -3,7 +3,7 @@ import { DbRepository } from "../repositories/DbRepository";
 import { Repository } from "../repositories/Repository";
 
 /**
- * DataObject
+ * Base class for data objects
  * @param  {string} type - the type of the concrete class that extends this class
  */
 export abstract class DataObject {
