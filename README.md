@@ -20,6 +20,13 @@ Install the required dependencies:
 npm install
 ```
 
+## Configuration
+
+You will need to declare which repository to be used by setting the
+`DATA_SOURCE` enviroment variable in the `.env` file. This can be set to either `csv` or `db` to select either the CSV or Database repositories respectfully. Check the `.env.example` file for an example.
+
+If `DATA_SOURCE` is not defined or not recognised, the application will default to using the CSV repository.
+
 ## Usage
 
 Start the GraphQL Server.

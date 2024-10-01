@@ -1,4 +1,5 @@
 import { CsvRepository } from "../repositories/CsvRepository";
+import { DbRepository } from "../repositories/DbRepository";
 import { Repository } from "../repositories/Repository";
 
 /**
@@ -15,7 +16,9 @@ export abstract class DataObject {
       case "csv":
         repo = new CsvRepository(this.type);
         break;
-      // TODO: Implement database repository
+      case "db":
+        repo = new DbRepository(this.type);
+        break;
       default:
         repo = new CsvRepository(this.type);
         break;
