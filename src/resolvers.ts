@@ -1,3 +1,4 @@
+import { Customer, Product } from "./AppStateTypes";
 import { CustomerObject } from "./dataObjects/CustomerObject";
 import { ProductObject } from "./dataObjects/ProductObject";
 
@@ -8,5 +9,11 @@ export const resolvers = {
   Query: {
     products: () => productObject.getProducts(),
     customers: () => customerObject.getCustomers(),
+  },
+  Mutation: {
+    addProduct: (_: any, newProduct: Product) =>
+      productObject.addProduct(newProduct),
+    addCustomer: (_: any, newCustomer: Customer) =>
+      customerObject.addCustomer(newCustomer),
   },
 };

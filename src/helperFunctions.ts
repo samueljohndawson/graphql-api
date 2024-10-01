@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 /**
- * csvToJson
+ * Reads a CSV file and converts it into an array of objects.
  * @param  {string} fileName - the name of the file (including extension) contained in the data/csv directory
  */
 export const csvToObjects = (fileName: string) => {
@@ -25,4 +25,20 @@ export const csvToObjects = (fileName: string) => {
     }
   });
   return objects;
+};
+
+/**
+ * Appends a new object to a CSV file
+ * @param  {object} obj - The object to be appended to the CSV file
+ * @param  {string} fileName - The name of the file (including extension) contained in the data/csv directory
+ */
+export const writeObjectToCsv = (obj: any, fileName: string) => {
+  const filePath = `./data/csv/${fileName}`;
+  fs.appendFileSync(filePath, "\n");
+  Object.entries(obj).forEach(([key, _value], index) => {
+    fs.appendFileSync(filePath, `${obj[key]}`);
+    if (index < Object.keys(obj).length - 1) {
+      fs.appendFileSync(filePath, ",");
+    }
+  });
 };

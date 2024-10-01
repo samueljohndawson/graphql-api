@@ -1,3 +1,4 @@
+import { Customer } from "../AppStateTypes";
 import { DataObject } from "./DataObject";
 
 export class CustomerObject extends DataObject {
@@ -6,5 +7,8 @@ export class CustomerObject extends DataObject {
   }
   getCustomers() {
     return this.repository.read();
+  }
+  addCustomer(customer: Customer) {
+    return this.repository.write(customer);
   }
 }
