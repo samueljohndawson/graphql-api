@@ -5,11 +5,11 @@ export class ProductObject extends DataObject {
   constructor() {
     super("product");
   }
-  getProducts() {
+  getAll() {
     return this.repository.read();
   }
 
-  addProduct(product: Product) {
+  add(product: Product) {
     return this.repository.write(product);
   }
 }
