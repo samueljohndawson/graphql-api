@@ -7,13 +7,12 @@ let customerObject = new CustomerObject();
 
 export const resolvers = {
   Query: {
-    products: () => productObject.getProducts(),
-    customers: () => customerObject.getCustomers(),
+    products: () => productObject.getAll(),
+    customers: () => customerObject.getAll(),
   },
   Mutation: {
-    addProduct: (_: any, newProduct: Product) =>
-      productObject.addProduct(newProduct),
+    addProduct: (_: any, newProduct: Product) => productObject.add(newProduct),
     addCustomer: (_: any, newCustomer: Customer) =>
-      customerObject.addCustomer(newCustomer),
+      customerObject.add(newCustomer),
   },
 };

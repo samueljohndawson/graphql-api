@@ -5,10 +5,10 @@ export class CustomerObject extends DataObject {
   constructor() {
     super("customer");
   }
-  getCustomers() {
+  getAll() {
     return this.repository.read();
   }
-  addCustomer(customer: Customer) {
+  add(customer: Customer) {
     return this.repository.write(customer);
   }
 }

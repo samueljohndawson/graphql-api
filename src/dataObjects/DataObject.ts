@@ -25,4 +25,7 @@ export abstract class DataObject {
     }
     this.repository = repo;
   }
+
+  abstract getAll(): any;
+  abstract add(obj: any): any;
 }

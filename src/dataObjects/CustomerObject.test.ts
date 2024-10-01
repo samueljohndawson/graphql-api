@@ -13,7 +13,7 @@ describe("CustomerObject", () => {
     const readSpy = jest.spyOn(customerObject.repository, "read");
 
     // When
-    customerObject.getCustomers();
+    customerObject.getAll();
 
     // Then
     expect(readSpy).toHaveBeenCalled();
