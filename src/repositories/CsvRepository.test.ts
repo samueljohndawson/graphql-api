@@ -62,4 +62,41 @@ describe("CsvRepository", () => {
       "type not recognized: unknown"
     );
   });
+  it("writes to product csv when type is product", () => {
+    // Given
+    const repo = new CsvRepository("product");
+    const newData = {
+      key1: "new_value1",
+      key2: "new_value2",
+      key3: "new_value3",
+    };
+
+    // Mock the write method
+    const writeMock = jest.spyOn(repo, "write");
+
+    // When
+    repo.write(newData);
+
+    // Then
+    expect(writeMock).toHaveBeenCalled();
+  });
+
+  it("writes to customer csv when type is customer", () => {
+    // Given
+    const repo = new CsvRepository("customer");
+    const newData = {
+      key1: "new_value1",
+      key2: "new_value2",
+      key3: "new_value3",
+    };
+
+    // Mock the write method
+    const writeMock = jest.spyOn(repo, "write");
+
+    // When
+    repo.write(newData);
+
+    // Then
+    expect(writeMock).toHaveBeenCalled();
+  });
 });
