@@ -1,4 +1,4 @@
-import { CustomerObject } from "./dataObjects/CutomerObject";
+import { CustomerObject } from "./dataObjects/CustomerObject";
 import { ProductObject } from "./dataObjects/ProductObject";
 
 let productObject = new ProductObject();
