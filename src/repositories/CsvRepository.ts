@@ -1,6 +1,10 @@
 import { csvToObjects } from "../helperFunctions";
 import { Repository } from "./Repository";
 
+/**
+ * CSV implementation of Repository
+ * @param  {string} type - the type of the dataObject
+ */
 export class CsvRepository extends Repository {
   type: string;
   constructor(type: string) {
