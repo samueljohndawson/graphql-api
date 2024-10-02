@@ -1,6 +1,6 @@
 # GraphQL Server
 
-This app runs [Apollo Server](https://www.apollographql.com/docs/) which can query and mutate items such as Products and Customers.
+This app runs [Apollo Server](https://www.apollographql.com/docs/) which can be queried and can mutate items such as Products and Customers.
 
 ## Prerequisites
 
