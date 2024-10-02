@@ -14,66 +14,103 @@ describe("CsvRepository", () => {
     };
     (helperFunctions.csvToObjects as jest.Mock).mockReturnValue(newData);
     (helperFunctions.writeObjectToCsv as jest.Mock).mockReturnValue(newData);
-  });
-
-  it("should log an error message when type is not recognized", () => {
-    // Given
-    const consoleErrorSpy = jest.spyOn(console, "error");
-    const csvRepository = new CsvRepository("unknown");
-
-    // When
-    csvRepository.read();
-
-    // Then
-    expect(consoleErrorSpy).toHaveBeenCalledWith(
-      "type not recognized: unknown"
+    (helperFunctions.removeObjectFromCsv as jest.Mock).mockReturnValue(
+      undefined
     );
   });
+  describe("read", () => {
+    it("should log an error message when type is not recognized", () => {
+      // Given
+      const consoleErrorSpy = jest.spyOn(console, "error");
+      const csvRepository = new CsvRepository("unknown");
 
-  it("reads from product csv when type is product", () => {
-    // Given
-    const repo = new CsvRepository("product");
+      // When
+      csvRepository.read();
 
-    // When
-    repo.read();
+      // Then
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        "type not recognized: unknown"
+      );
+    });
 
-    // Then
-    expect(helperFunctions.csvToObjects).toHaveBeenCalledWith("product.csv");
+    it("reads from product csv when type is product", () => {
+      // Given
+      const repo = new CsvRepository("product");
+
+      // When
+      repo.read();
+
+      // Then
+      expect(helperFunctions.csvToObjects).toHaveBeenCalledWith("product.csv");
+    });
+    it("reads from customer csv when type is customer", () => {
+      // Given
+      const repo = new CsvRepository("customer");
+
+      // When
+      repo.read();
+
+      // Then
+      expect(helperFunctions.csvToObjects).toHaveBeenCalledWith("customer.csv");
+    });
   });
-  it("reads from customer csv when type is customer", () => {
-    // Given
-    const repo = new CsvRepository("customer");
+  describe("write", () => {
+    it("writes to product csv when type is product", () => {
+      // Given
+      const repo = new CsvRepository("product");
 
-    // When
-    repo.read();
+      // When
+      repo.write(newData);
 
-    // Then
-    expect(helperFunctions.csvToObjects).toHaveBeenCalledWith("customer.csv");
+      // Then
+      expect(helperFunctions.writeObjectToCsv).toHaveBeenCalledWith(
+        newData,
+        "product.csv"
+      );
+    });
+    it("writes to customer csv when type is customer", () => {
+      // Given
+      const repo = new CsvRepository("customer");
+
+      // When
+      repo.write(newData);
+
+      // Then
+      expect(helperFunctions.writeObjectToCsv).toHaveBeenCalledWith(
+        newData,
+        "customer.csv"
+      );
+    });
   });
-  it("writes to product csv when type is product", () => {
-    // Given
-    const repo = new CsvRepository("product");
+  describe("remove", () => {
+    it("removes an entry from product csv when type is product", () => {
+      // Given
+      const repo = new CsvRepository("product");
 
-    // When
-    repo.write(newData);
+      // When
+      repo.remove("123");
 
-    // Then
-    expect(helperFunctions.writeObjectToCsv).toHaveBeenCalledWith(
-      newData,
-      "product.csv"
-    );
-  });
-  it("writes to customer csv when type is customer", () => {
-    // Given
-    const repo = new CsvRepository("customer");
+      // Then
+      expect(helperFunctions.removeObjectFromCsv).toHaveBeenCalledWith(
+        "product.csv",
+        "vin",
+        "123"
+      );
+    });
 
-    // When
-    repo.write(newData);
+    it("removes an entry from customer csv when type is customer", () => {
+      // Given
+      const repo = new CsvRepository("customer");
 
-    // Then
-    expect(helperFunctions.writeObjectToCsv).toHaveBeenCalledWith(
-      newData,
-      "customer.csv"
-    );
+      // When
+      repo.remove("123");
+
+      // Then
+      expect(helperFunctions.removeObjectFromCsv).toHaveBeenCalledWith(
+        "customer.csv",
+        "email",
+        "123"
+      );
+    });
   });
 });
