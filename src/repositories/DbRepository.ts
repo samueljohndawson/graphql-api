@@ -5,7 +5,7 @@ import { Repository } from "./Repository";
  * @param  {string} type - the type of the dataObject
  */
 export class DbRepository extends Repository {
-  type: string;
+  protected type: string;
   constructor(type: string) {
     super();
     this.type = type;

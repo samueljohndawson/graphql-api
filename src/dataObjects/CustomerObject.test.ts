@@ -17,7 +17,7 @@ describe("CustomerObject", () => {
 
   it("should call the read method of its repository when getAll is called", () => {
     // Given
-    const readSpy = jest.spyOn(customerObject.repository, "read");
+    const readSpy = jest.spyOn(customerObject.getRepository(), "read");
 
     // When
     customerObject.getAll();
@@ -28,7 +28,7 @@ describe("CustomerObject", () => {
 
   it("should call the write method of its repository when add is called", () => {
     // Given
-    const readSpy = jest.spyOn(customerObject.repository, "write");
+    const readSpy = jest.spyOn(customerObject.getRepository(), "write");
     readSpy.mockReturnValue(newData);
 
     // When

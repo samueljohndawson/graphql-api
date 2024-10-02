@@ -7,8 +7,8 @@ import { Repository } from "../repositories/Repository";
  * @param  {string} type - the type of the concrete class that extends this class
  */
 export abstract class DataObject {
-  type: string;
-  repository: Repository;
+  protected type: string;
+  protected repository: Repository;
   constructor(type: string) {
     this.type = type;
     let repo;
@@ -24,6 +24,13 @@ export abstract class DataObject {
         break;
     }
     this.repository = repo;
+  }
+
+  getRepository(): Repository {
+    return this.repository;
+  }
+  getType(): string {
+    return this.type;
   }
 
   abstract getAll(): any;

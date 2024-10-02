@@ -17,7 +17,7 @@ describe("ProductObject", () => {
 
   it("should call the read method of its repository when getAll is called", () => {
     // Given
-    const readSpy = jest.spyOn(productObject.repository, "read");
+    const readSpy = jest.spyOn(productObject.getRepository(), "read");
 
     // When
     productObject.getAll();
@@ -28,7 +28,7 @@ describe("ProductObject", () => {
 
   it("should call the write method of its repository when add is called", () => {
     // Given
-    const readSpy = jest.spyOn(productObject.repository, "write");
+    const readSpy = jest.spyOn(productObject.getRepository(), "write");
     readSpy.mockReturnValue(newData);
 
     // When
