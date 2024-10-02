@@ -114,7 +114,7 @@ describe("writeObjectToCsv", () => {
 describe("removeObjectFromCsv", () => {
   let csvContents: string;
   beforeEach(() => {
-    csvContents = "id,name,age\n1,John,25\n2,Jane,30\n3,Sam,28";
+    csvContents = "email,name,age\n1,John,25\n2,Jane,30\n3,Sam,28";
 
     // Clear mocks
     (fs.readFileSync as jest.Mock).mockClear();
@@ -126,12 +126,12 @@ describe("removeObjectFromCsv", () => {
     (fs.readFileSync as jest.Mock).mockReturnValue(csvContents);
 
     // When
-    removeObjectFromCsv("test.csv", "id", "2");
+    removeObjectFromCsv("test.csv", "email", "2");
 
     // Then
     expect(fs.writeFileSync).toHaveBeenCalledWith(
       "./data/csv/test.csv",
-      "id,name,age\n1,John,25\n3,Sam,28"
+      "email,name,age\n1,John,25\n3,Sam,28"
     );
   });
 
@@ -140,7 +140,7 @@ describe("removeObjectFromCsv", () => {
     (fs.readFileSync as jest.Mock).mockReturnValue(csvContents);
 
     // When
-    removeObjectFromCsv("test.csv", "id", "4");
+    removeObjectFromCsv("test.csv", "email", "4");
 
     // Then
     expect(fs.writeFileSync).toHaveBeenCalledWith(
@@ -155,7 +155,7 @@ describe("removeObjectFromCsv", () => {
     const consoleErrorSpy = jest.spyOn(console, "error");
 
     // When
-    removeObjectFromCsv("test.csv", "id", "1");
+    removeObjectFromCsv("test.csv", "email", "1");
 
     // Then
     expect(consoleErrorSpy).toHaveBeenCalledWith("CSV file is empty.");
