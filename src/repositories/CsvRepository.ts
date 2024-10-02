@@ -15,9 +15,19 @@ export class CsvRepository extends Repository {
   read() {
     switch (this.type) {
       case "product":
-        return csvToObjects("product.csv");
+        try {
+          return csvToObjects("product.csv");
+        } catch (error) {
+          console.error("Error reading from CSV:", error);
+          break;
+        }
       case "customer":
-        return csvToObjects("customer.csv");
+        try {
+          return csvToObjects("customer.csv");
+        } catch (error) {
+          console.error("Error reading from CSV:", error);
+          break;
+        }
       default:
         console.error("type not recognized: " + this.type);
         break;
