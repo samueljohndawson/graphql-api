@@ -11,4 +11,7 @@ export class CustomerObject extends DataObject {
   add(customer: Customer) {
     return this.repository.write(customer);
   }
+  remove(id: string) {
+    return this.repository.remove(id);
+  }
 }

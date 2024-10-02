@@ -35,4 +35,5 @@ export abstract class DataObject {
 
   abstract getAll(): any;
   abstract add(obj: any): any;
+  abstract remove(id: string): any;
 }

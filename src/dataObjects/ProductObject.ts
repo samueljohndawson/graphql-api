@@ -12,4 +12,7 @@ export class ProductObject extends DataObject {
   add(product: Product) {
     return this.repository.write(product);
   }
+  remove(id: string) {
+    return this.repository.remove(id);
+  }
 }

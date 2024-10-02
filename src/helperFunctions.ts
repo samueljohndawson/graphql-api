@@ -43,9 +43,16 @@ export const writeObjectToCsv = (obj: any, fileName: string) => {
   });
 };
 
+/**
+ * Removes an entry from a CSV file
+ * @param  {string} fileName - The name of the file (including extension) contained in the data/csv directory
+ * @param  {object} key - The key on which the entry should be removed
+ * @param  {string} id - The id of the entry to be removed
+ *
+ */
 export const removeObjectFromCsv = (
   fileName: string,
-  key: string,
+  key: "vin" | "email",
   id: string
 ) => {
   const filePath = `./data/csv/${fileName}`;

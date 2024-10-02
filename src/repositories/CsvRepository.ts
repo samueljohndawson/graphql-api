@@ -1,4 +1,8 @@
-import { csvToObjects, writeObjectToCsv } from "../helperFunctions";
+import {
+  csvToObjects,
+  removeObjectFromCsv,
+  writeObjectToCsv,
+} from "../helperFunctions";
 import { Repository } from "./Repository";
 
 /**
@@ -12,18 +16,21 @@ export class CsvRepository extends Repository {
     this.type = type;
   }
 
+  productCSVFileName = "product.csv";
+  customerCSVFileName = "customer.csv";
+
   read() {
     switch (this.type) {
       case "product":
         try {
-          return csvToObjects("product.csv");
+          return csvToObjects(this.productCSVFileName);
         } catch (error) {
           console.error("Error reading from CSV:", error);
           break;
         }
       case "customer":
         try {
-          return csvToObjects("customer.csv");
+          return csvToObjects(this.customerCSVFileName);
         } catch (error) {
           console.error("Error reading from CSV:", error);
           break;
@@ -38,7 +45,7 @@ export class CsvRepository extends Repository {
     switch (this.type) {
       case "product":
         try {
-          writeObjectToCsv(obj, "product.csv");
+          writeObjectToCsv(obj, this.productCSVFileName);
           console.log("Product added successfully: " + JSON.stringify(obj));
           return obj;
         } catch (error) {
@@ -47,11 +54,37 @@ export class CsvRepository extends Repository {
         }
       case "customer":
         try {
-          writeObjectToCsv(obj, "customer.csv");
+          writeObjectToCsv(obj, this.customerCSVFileName);
           console.log("Customer added successfully: " + JSON.stringify(obj));
           return obj;
         } catch (error) {
           console.error("Error writing to CSV:", error);
+          break;
+        }
+      default:
+        console.error("type not recognized: " + this.type);
+        break;
+    }
+  }
+
+  remove(id: string) {
+    switch (this.type) {
+      case "product":
+        try {
+          removeObjectFromCsv(this.productCSVFileName, "vin", id);
+          console.log("Product removed successfully");
+          return id;
+        } catch (error) {
+          console.error("Error writing to CSV:", error);
+          break;
+        }
+      case "customer":
+        try {
+          removeObjectFromCsv(this.customerCSVFileName, "email", id);
+          console.log("Customer removed successfully");
+          return id;
+        } catch (error) {
+          console.error("Error editing CSV:", error);
           break;
         }
       default:

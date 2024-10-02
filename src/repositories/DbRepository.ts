@@ -15,8 +15,14 @@ export class DbRepository extends Repository {
     // TODO: Implement database read logic
     throw new Error("Method not implemented. Cannot read from database");
   }
-  write(obj: object): void {
+  write(obj: object) {
     // TODO: Implement database write logic
     throw new Error(`Method not implemented. Cannot write ${obj} to database`);
+  }
+  remove(id: string) {
+    // TODO: Implement database remove logic
+    throw new Error(
+      `Method not implemented. Cannot remove entry with id: ${id} from database`
+    );
   }
 }

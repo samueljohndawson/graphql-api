@@ -37,5 +37,7 @@ export const typeDefs = gql`
       contact_number: String!
       postcode: String!
     ): Customer
+    removeProduct(vin: String!): ID
+    removeCustomer(email: String!): ID
   }
 `;

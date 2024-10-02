@@ -14,5 +14,9 @@ export const resolvers = {
     addProduct: (_: any, newProduct: Product) => productObject.add(newProduct),
     addCustomer: (_: any, newCustomer: Customer) =>
       customerObject.add(newCustomer),
+    removeProduct: (_: any, product: { vin: string }) =>
+      productObject.remove(product.vin),
+    removeCustomer: (_: any, customer: { email: string }) =>
+      customerObject.remove(customer.email),
   },
 };
