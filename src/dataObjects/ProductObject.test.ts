@@ -17,24 +17,36 @@ describe("ProductObject", () => {
 
   it("should call the read method of its repository when getAll is called", () => {
     // Given
-    const readSpy = jest.spyOn(productObject.getRepository(), "read");
+    const spy = jest.spyOn(productObject.getRepository(), "read");
 
     // When
     productObject.getAll();
 
     // Then
-    expect(readSpy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalled();
   });
 
   it("should call the write method of its repository when add is called", () => {
     // Given
-    const readSpy = jest.spyOn(productObject.getRepository(), "write");
-    readSpy.mockReturnValue(newData);
+    const spy = jest.spyOn(productObject.getRepository(), "write");
+    spy.mockReturnValue(newData);
 
     // When
     productObject.add(newData);
 
     // Then
-    expect(readSpy).toHaveBeenCalledWith(newData);
+    expect(spy).toHaveBeenCalledWith(newData);
+  });
+
+  it("should call the remove method of its repository when remove is called", () => {
+    // Given
+    const spy = jest.spyOn(productObject.getRepository(), "remove");
+    spy.mockReturnValue(newData);
+
+    // When
+    productObject.remove(newData);
+
+    // Then
+    expect(spy).toHaveBeenCalledWith(newData);
   });
 });
