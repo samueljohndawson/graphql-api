@@ -42,3 +42,24 @@ export const writeObjectToCsv = (obj: any, fileName: string) => {
     }
   });
 };
+
+export const removeObjectFromCsv = (
+  fileName: string,
+  key: string,
+  id: string
+) => {
+  const filePath = `./data/csv/${fileName}`;
+  const text = fs.readFileSync(filePath, { encoding: "utf8" });
+  if (text === "") {
+    console.error("CSV file is empty.");
+    return;
+  }
+  const rows = text.split("\n");
+  const headerRow = rows[0].split(",");
+  const idIndex = headerRow.indexOf(key);
+  const updatedRows = rows.filter((row) => {
+    const rowValues = row.split(",");
+    return rowValues[idIndex].trim() !== id.trim();
+  });
+  fs.writeFileSync(filePath, updatedRows.join("\n"));
+};

@@ -1,5 +1,5 @@
 import { describe, expect, it, jest, beforeEach } from "@jest/globals";
-import { csvToObjects } from "./helperFunctions";
+import { csvToObjects, removeObjectFromCsv } from "./helperFunctions";
 import { writeObjectToCsv } from "./helperFunctions";
 import * as fs from "fs";
 
@@ -8,7 +8,7 @@ jest.mock("fs");
 
 describe("csvToObjects", () => {
   beforeEach(() => {
-    // Clear all instances and calls to constructor and all methods:
+    // Clear mocks
     (fs.readFileSync as jest.Mock).mockClear();
   });
 
@@ -64,7 +64,7 @@ describe("csvToObjects", () => {
 
 describe("writeObjectToCsv", () => {
   beforeEach(() => {
-    // Clear all instances and calls to constructor and all methods:
+    // Clear mocks
     (fs.appendFileSync as jest.Mock).mockClear();
   });
 
@@ -108,5 +108,56 @@ describe("writeObjectToCsv", () => {
       `./data/csv/${fileName}`,
       `${obj.age}`
     );
+  });
+});
+
+describe("removeObjectFromCsv", () => {
+  let csvContents: string;
+  beforeEach(() => {
+    csvContents = "id,name,age\n1,John,25\n2,Jane,30\n3,Sam,28";
+
+    // Clear mocks
+    (fs.readFileSync as jest.Mock).mockClear();
+    (fs.writeFileSync as jest.Mock).mockClear();
+  });
+
+  it("should remove the object with the given id from the CSV file", () => {
+    // Given
+    (fs.readFileSync as jest.Mock).mockReturnValue(csvContents);
+
+    // When
+    removeObjectFromCsv("test.csv", "id", "2");
+
+    // Then
+    expect(fs.writeFileSync).toHaveBeenCalledWith(
+      "./data/csv/test.csv",
+      "id,name,age\n1,John,25\n3,Sam,28"
+    );
+  });
+
+  it("should not change the CSV contents if the id is not found in the file", () => {
+    // Given
+    (fs.readFileSync as jest.Mock).mockReturnValue(csvContents);
+
+    // When
+    removeObjectFromCsv("test.csv", "id", "4");
+
+    // Then
+    expect(fs.writeFileSync).toHaveBeenCalledWith(
+      "./data/csv/test.csv",
+      csvContents
+    );
+  });
+
+  it("should handle cases where the CSV file is empty", () => {
+    // Given
+    (fs.readFileSync as jest.Mock).mockReturnValue("");
+    const consoleErrorSpy = jest.spyOn(console, "error");
+
+    // When
+    removeObjectFromCsv("test.csv", "id", "1");
+
+    // Then
+    expect(consoleErrorSpy).toHaveBeenCalledWith("CSV file is empty.");
   });
 });
